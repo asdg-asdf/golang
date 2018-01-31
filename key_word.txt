@@ -1,0 +1,31 @@
+Go的关键字有25个只有25个：
+import       导入包
+package      包
+const        定义常量
+var          变量定义
+func         定义函数
+return       函数返回
+interface    接口类型
+select       选择
+defer        延时执行代码
+go           并发执行
+goto         跳转到指定代码段
+map          字典类型
+struct       结构体定义
+chan         通道定义
+if           判断
+else         否则
+range        循环结构体(可循环的如切片字典等)
+type         类型定义
+for          循环
+continue     继续执行下面代码或下一次循环
+break        跳出本次循环体或者调到指定代码位置
+switch       交换开个
+case         条件判断
+default      默认执行代码段
+fallthrough  一致执行下面代码
+
+Go的注释方法
+// ：单行注释
+/* */ ：多行注释
+
