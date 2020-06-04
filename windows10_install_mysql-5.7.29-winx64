@@ -1,0 +1,61 @@
+windows10  install  mysql-5.7.29-winx64
+下载 mysql-5.7.29-winx64安装包 mysql-5.7.29-winx64.zip
+解压到 D:\mysql-5.7.29-winx64 中
+管理员权限 打开一个 command 窗口
+进入 cd D:\mysql-5.7.29-winx64\bin 目录
+
+D:\mysql-5.7.29-winx64\bin>mysqld.exe  --install    #执行 mysqld.exe  --install 进行安装
+Service successfully installed.                     #显示安装成功
+
+
+创建 my.ini文件 D:\mysql-5.7.29-winx64\my.ini 内容如下
+[mysqld]
+basedir=D:\mysql-5.7.29-winx64
+datadir=D:\mysql-5.7.29-winx64\data
+port=3306
+#skip-grant-tables     #该行为root无需密码登录，为修改root密码使用
+
+
+D:\mysql-5.7.29-winx64\bin>mysqld.exe  --initialize  #对数据库进行初始化
+
+
+D:\mysql-5.7.29-winx64\bin>net start mysql          #启动数据库
+MySQL 服务正在启动 ..
+MySQL 服务无法启动。
+服务没有报告任何错误。
+请键入 NET HELPMSG 3534 以获得更多的帮助。
+
+
+数据root密码在  D:\mysql-5.7.29-winx64\data\${hostname}.err 文件内 ${hostname}为你的计算机名称
+
+可直接登录mysql
+D:\mysql-5.7.29-winx64\bin>mysql -uroot -p密码
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.29 MySQL Community Server (GPL)
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql>
+
+
+如果无法登录请在 my.ini 文件打开 skip-grant-tables 条目
+直接登录D:\mysql-5.7.29-winx64\bin>mysql -uroot -p  要求输密码时候直接回车
+mysql> update mysql.user set authentication_string=password('1q2w3e4r') where user='root';
+mysql> flush privileges;
+mysql> quit
+
+重新登录
+D:\mysql-5.7.29-winx64\bin>mysql -uroot -p1q2w3e4r
+
+修改 my.ini 中 skip-grant-tables 为 #skip-grant-tables
+
+重启动 mysql 进程
+D:\mysql-5.7.29-winx64\bin>net stop mysql          #停止数据库
+D:\mysql-5.7.29-winx64\bin>net start mysql          #启动数据库
+
+
+
